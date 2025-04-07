@@ -1,0 +1,30 @@
+from flask import Flask, render_template
+import time, datetime
+import RPi.GPIO as GPIO
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+
+led = 15
+GPIO.setup(led, GPIO.OUT)
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    GPIO.output(led, True)
+    return render_template("index.html")
+
+@app.route("/ledon")
+def about():
+    GPIO.output(led, False)
+    return render_template("about.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+try:
+    while True:
+        time.sleep(3)
+except:
+    GPIO.cleanup()
