@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import time, datetime
+import time
 import RPi.GPIO as GPIO
 
 GPIO.setwarnings(False)
